@@ -20,31 +20,17 @@ class StarredScreen extends StatefulWidget {
 class _StarredScreenState extends State<StarredScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<Scheme> _starredSchemes = [];
-  List<HealthNotice> _starredNotices = [];
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _loadStarredItems();
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  Future<void> _loadStarredItems() async {
-    setState(() => _isLoading = true);
-    final db = LocalDatabase.instance;
-    _starredSchemes = await db.getStarredSchemes();
-    _starredNotices = await db.getStarredHealthNotices();
-    if (mounted) {
-      setState(() => _isLoading = false);
-    }
   }
 
   @override
@@ -66,15 +52,13 @@ class _StarredScreenState extends State<StarredScreen>
           ],
         ),
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : TabBarView(
-              controller: _tabController,
-              children: [
-                _buildSchemesTab(),
-                _buildNoticesTab(),
-              ],
-            ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          _buildSchemesTab(),
+          _buildNoticesTab(),
+        ],
+      ),
     );
   }
 
@@ -121,7 +105,7 @@ class _StarredScreenState extends State<StarredScreen>
                     builder: (_) => SchemeDetailScreen(scheme: scheme),
                   ),
                 );
-                _loadStarredItems();
+                if (mounted) setState(() {});
               },
             );
           },
@@ -174,7 +158,7 @@ class _StarredScreenState extends State<StarredScreen>
                         HealthNoticeDetailScreen(notice: notice),
                   ),
                 );
-                _loadStarredItems();
+                if (mounted) setState(() {});
               },
             );
           },

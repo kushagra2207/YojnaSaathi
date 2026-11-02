@@ -1,30 +1,37 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:frontend_app/main.dart';
+import 'package:yojna_saathi_frontend_app/models/scheme.dart';
+import 'package:yojna_saathi_frontend_app/models/health_notice.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('Scheme model parses JSON correctly', () {
+    final scheme = Scheme.fromJson({
+      'id': 1,
+      'title': 'Test Scheme',
+      'description': 'Description',
+      'eligibility': 'Everyone',
+      'documents_required': 'None',
+      'where_to_apply': 'Panchayat',
+      'category': 'pension',
+      'created_at': '2026-01-01',
+      'updated_at': '2026-01-01',
+    });
+    expect(scheme.id, 1);
+    expect(scheme.title, 'Test Scheme');
+    expect(scheme.category, 'pension');
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('HealthNotice model parses JSON correctly', () {
+    final notice = HealthNotice.fromJson({
+      'id': 1,
+      'title': 'Test Camp',
+      'description': 'Details',
+      'type': 'camp',
+      'location': 'PHC',
+      'created_at': '2026-01-01',
+      'updated_at': '2026-01-01',
+    });
+    expect(notice.id, 1);
+    expect(notice.title, 'Test Camp');
+    expect(notice.type, 'camp');
   });
 }
