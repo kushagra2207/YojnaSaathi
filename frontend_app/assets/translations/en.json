@@ -1,9 +1,9 @@
 {
   "app_name": "YojnaSaathi",
   "home_title": "YojnaSaathi",
-  "welfare_schemes": "Welfare Schemes 📋",
-  "health_notices": "Health Camps & Notices 🏥",
-  "starred_items": "⭐ Starred Items",
+  "welfare_schemes": "Welfare Schemes",
+  "health_notices": "Health Camps & Notices",
+  "starred_items": "Starred Items",
   "last_synced": "Last synced: {time}",
   "never_synced": "Never synced — tap to sync",
   "syncing": "Syncing...",

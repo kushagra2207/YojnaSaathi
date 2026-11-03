@@ -1,9 +1,9 @@
 {
   "app_name": "योजनासाथी",
   "home_title": "योजनासाथी",
-  "welfare_schemes": "कल्याणकारी योजनाएँ 📋",
-  "health_notices": "स्वास्थ्य शिविर और सूचनाएँ 🏥",
-  "starred_items": "⭐ तारांकित आइटम",
+  "welfare_schemes": "कल्याणकारी योजनाएँ",
+  "health_notices": "स्वास्थ्य शिविर और सूचनाएँ",
+  "starred_items": "तारांकित आइटम",
   "last_synced": "अंतिम सिंक: {time}",
   "never_synced": "कभी सिंक नहीं हुआ — सिंक करने के लिए टैप करें",
   "syncing": "सिंक हो रहा है...",
