@@ -9,6 +9,9 @@ class SyncStatusBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Listen to locale changes so this widget immediately updates when language switches
+    final _ = context.locale;
+
     return Consumer<SyncProvider>(
       builder: (context, syncProvider, child) {
         Color backgroundColor;
@@ -17,21 +20,22 @@ class SyncStatusBar extends StatelessWidget {
 
         if (syncProvider.isSyncing) {
           backgroundColor = Colors.blue.shade600;
-          text = 'syncing'.tr();
+          text = context.tr('syncing');
           onTap = null;
         } else if (syncProvider.syncError != null) {
           backgroundColor = Colors.red.shade600;
-          text = 'sync_error'.tr(namedArgs: {'error': syncProvider.syncError!});
+          text = context.tr('sync_error', namedArgs: {'error': syncProvider.syncError!});
           onTap = () => syncProvider.sync();
         } else if (syncProvider.lastSyncedAt != null) {
           backgroundColor = Colors.teal.shade600;
-          text = 'last_synced'.tr(
-            namedArgs: {'time': timeAgo(syncProvider.lastSyncedAt!)},
+          text = context.tr(
+            'last_synced',
+            namedArgs: {'time': timeAgo(syncProvider.lastSyncedAt!, context)},
           );
           onTap = () => syncProvider.sync();
         } else {
           backgroundColor = Colors.orange.shade700;
-          text = 'never_synced'.tr();
+          text = context.tr('never_synced');
           onTap = () => syncProvider.sync();
         }
 

@@ -116,8 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
           PopupMenuButton<Locale>(
             icon: const Icon(Icons.language, size: 28),
             tooltip: 'language_selector'.tr(),
-            onSelected: (Locale locale) {
-              context.setLocale(locale);
+            onSelected: (Locale locale) async {
+              await context.setLocale(locale);
+              if (mounted) setState(() {});
             },
             itemBuilder: (context) => [
               PopupMenuItem(
