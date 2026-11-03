@@ -1,12 +1,13 @@
 .navbar {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 60%, #047857 100%);
   color: #ffffff;
   padding: 0 24px;
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 12px rgba(6, 78, 59, 0.25);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.2);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -29,9 +30,9 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 8px 18px;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -40,8 +41,9 @@
 }
 
 .navbar-logout-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(167, 243, 208, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 480px) {
