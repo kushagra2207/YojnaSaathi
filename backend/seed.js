@@ -114,35 +114,41 @@ const healthNotices = [
   },
 ];
 
-// Insert sample data
-console.log('Seeding database...');
+export function seedDatabase() {
+  console.log('Seeding database...');
 
-const insertScheme = db.prepare(`
-  INSERT INTO schemes (title, description, eligibility, documents_required, where_to_apply, category)
-  VALUES (?, ?, ?, ?, ?, ?)
-`);
+  const insertScheme = db.prepare(`
+    INSERT INTO schemes (title, description, eligibility, documents_required, where_to_apply, category)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `);
 
-const insertNotice = db.prepare(`
-  INSERT INTO health_notices (title, description, type, location, event_date)
-  VALUES (?, ?, ?, ?, ?)
-`);
+  const insertNotice = db.prepare(`
+    INSERT INTO health_notices (title, description, type, location, event_date)
+    VALUES (?, ?, ?, ?, ?)
+  `);
 
-const seedAll = db.transaction(() => {
-  // Clear existing data
-  db.prepare('DELETE FROM schemes').run();
-  db.prepare('DELETE FROM health_notices').run();
+  const seedAll = db.transaction(() => {
+    // Clear existing data
+    db.prepare('DELETE FROM schemes').run();
+    db.prepare('DELETE FROM health_notices').run();
 
-  for (const s of schemes) {
-    insertScheme.run(s.title, s.description, s.eligibility, s.documents_required, s.where_to_apply, s.category);
-  }
+    for (const s of schemes) {
+      insertScheme.run(s.title, s.description, s.eligibility, s.documents_required, s.where_to_apply, s.category);
+    }
 
-  for (const n of healthNotices) {
-    insertNotice.run(n.title, n.description, n.type, n.location, n.event_date);
-  }
-});
+    for (const n of healthNotices) {
+      insertNotice.run(n.title, n.description, n.type, n.location, n.event_date);
+    }
+  });
 
-seedAll();
+  seedAll();
 
-console.log(`Seeded ${schemes.length} schemes and ${healthNotices.length} health notices.`);
-console.log('Done!');
+  console.log(`Seeded ${schemes.length} schemes and ${healthNotices.length} health notices.`);
+  console.log('Done!');
+}
 
+// Auto-run if executed directly via `node seed.js`
+import { fileURLToPath } from 'url';
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  seedDatabase();
+}

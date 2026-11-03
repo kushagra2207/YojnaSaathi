@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.js';
 import schemesRoutes from './routes/schemes.js';
 import healthNoticesRoutes from './routes/healthNotices.js';
 import db from './db/database.js';
+import { seedDatabase } from './seed.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -49,6 +50,17 @@ app.get('/api/sync/latest', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
+
+// Auto-seed initial data if database is empty (useful on fresh deploys like Render)
+try {
+  const schemeCount = db.prepare('SELECT COUNT(*) as count FROM schemes').get();
+  if (schemeCount.count === 0) {
+    console.log('Database empty, automatically seeding initial data...');
+    seedDatabase();
+  }
+} catch (err) {
+  console.error('Failed to check or auto-seed database:', err.message);
+}
 
 app.listen(PORT, () => {
   console.log(`YojnaSaathi backend running on http://localhost:${PORT}`);
