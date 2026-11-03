@@ -100,7 +100,6 @@ function LoginPage() {
             {/* Header: On mobile shows the brand icon & name; on desktop shows admin portal title */}
             <div className="login-header">
               <div className="login-mobile-brand">
-                <span className="mobile-brand-icon" aria-hidden="true">🏛️</span>
                 <span className="mobile-brand-title">YojnaSaathi</span>
               </div>
               <h2 className="login-title">Sign In to Dashboard</h2>
